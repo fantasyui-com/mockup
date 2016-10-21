@@ -4,8 +4,6 @@ Automated high quality, high resolution, marketing art designer written in minim
 ## Requirements
 
 - [ImageMagick](https://imagemagick.org)
-- [bc](https://en.wikipedia.org/wiki/Bc_(programming_language) (You probably have this)
-- Bash
 
 ## Usage
 

@@ -1,0 +1,28 @@
+#!/bin/bash
+# author: http://fantasyui.com
+# code: https://github.com/fantasyui-com/cover
+
+SUB=$1;
+SRC=$2;
+OUT=$3;
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+if [ -d "${DIR}/lib/${SUB}" ]; then
+  if [ ! -d "${DIR}/lib/${SUB}" ]; then
+  	echo "error malformed script dir \"${DIR}/lib/${SUB}\""
+  	exit;
+  fi;
+  if [ ! -f "${SRC}" ]; then
+  	echo "${SRC} must exist, a regular file is expocted."
+  	exit;
+  fi;
+  . "${DIR}/lib/${SUB}/source.bash"
+else
+  echo "Preset \"${SUB}\" does not exist.";
+  echo Try one of the following instead;
+  echo "  ";
+  for NAME in $(ls -1 "${DIR}/lib/");
+  do
+    echo "  $0 $NAME \"~/Desktop/Screen Shot.jpg\" result.png"
+  done
+  echo "  ";
+fi;
