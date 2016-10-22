@@ -33,7 +33,23 @@ Fork this repository anywhere you like, open up your terminal execute: ```mockup
 
 ```shell
 
-~/GitHub/mockup/use laptop1 ~/merged-result.png ~/Desktop/source-screenshot.png ~/Desktop/another-source-screenshot.png
+~/GitHub/mockup/use laptop1 ~/the-result.png ~/Desktop/my-image1.png ~/Desktop/my-image2.png
+
+```
+
+## Snippets
+
+```shell
+
+mockup/use hand1 hand-demo.png my-file.png;
+
+mockup/use laptop1 laptop-demo.png my-file.png;
+
+mockup/use tv1 tv-demo.png my-file.png;
+
+mockup/use tablet1 tablet-demo.png my-file.png;
+
+mockup/use gray1 gray-demo.png my-file1.png my-file2.png;
 
 ```
 
@@ -47,12 +63,10 @@ Here is a quick script that will create images based on Screen*.png on your ~/De
 INDEX=1;
 find ~/Desktop -maxdepth 1 -type f -iname "Screen*.png" | while read NAME
 do
-
   ~/GitHub/mockup/use hand1 ./test-hand1-${INDEX}.png "${NAME}";
   ~/GitHub/mockup/use laptop1 ./test-laptop1-${INDEX}.png "${NAME}";
-  ~/GitHub/mockup/use tv1 ./test-laptop1-${INDEX}.png "${NAME}";
-  ~/GitHub/mockup/use tablet1 ./test-laptop1-${INDEX}.png "${NAME}";
-
+  ~/GitHub/mockup/use tv1 ./test-tv1-${INDEX}.png "${NAME}";
+  ~/GitHub/mockup/use tablet1 ./test-tablet1-${INDEX}.png "${NAME}";
   INDEX=$((INDEX+1));
 done;
 
