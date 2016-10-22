@@ -3,8 +3,19 @@
 # code: https://github.com/fantasyui-com/cover
 
 SUB=$1;
-SRC=$2;
-OUT=$3;
+OUT=$2;
+
+SRC=$3;
+
+# Multiple file support
+SRCS=( "${@:3}" )
+# developer note mutiple files are here
+# echo SRCS: "${SRCS[@]}"
+# and
+# echo SRCS0: ${SRCS[0]}
+# echo SRCS1: ${SRCS[1]}
+# echo SRCS2: ${SRCS[2]}
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 if [ -d "${DIR}/lib/${SUB}" ]; then
   if [ ! -d "${DIR}/lib/${SUB}" ]; then
@@ -12,7 +23,7 @@ if [ -d "${DIR}/lib/${SUB}" ]; then
   	exit;
   fi;
   if [ ! -f "${SRC}" ]; then
-  	echo "${SRC} must exist, a regular file is expocted."
+  	echo "${SRC} must exist."
   	exit;
   fi;
   . "${DIR}/lib/${SUB}/source.bash"
