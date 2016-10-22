@@ -23,7 +23,7 @@ HW=$(echo "scale=2;sqrt(((${CX}-${AX})^2)+((${CY}-${AY})^2))"|bc)
 HH=$(echo "scale=2;sqrt(((${BX}-${AX})^2)+((${BY}-${AY})^2))"|bc)
 
 # resize SRC image to match the artwork hole.
-convert "$SRC" -resize ${HW}x${HH}^ -crop ${HW}x${HH}+0+0 -sharpen 0x2 -quality 100 "${DIR}/lib/${SUB}/resized.png";
+convert "$SRC" -resize ${HW}x${HH}^ -gravity center -crop ${HW}x${HH}+0+0 -sharpen 0x2 -quality 100 "${DIR}/lib/${SUB}/resized.png";
 
 # insert resized SRC image into blank canvas;
 composite -geometry +0+0 "${DIR}/lib/${SUB}/resized.png" "${DIR}/lib/${SUB}/layer-01.png" "${DIR}/lib/${SUB}/layer-01.png";
