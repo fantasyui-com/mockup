@@ -81,3 +81,8 @@ done;
   - [tablet1](https://unsplash.com/@firmbee?photo=GANqCr1BRTU)
 - [Jens Kreuter](https://unsplash.com/@jenskreuter)
   - [tv1](https://unsplash.com/@jenskreuter?photo=ngMtsE5r9eI)
+
+## Roadmap
+
+- Each image will get a separate bash file (ex: mockup-tablet.sh, mockup-bigtv.sh)
+- Library of source images will be separated-out into mockup-library and present a JSON file for other languages.
