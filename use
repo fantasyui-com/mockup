@@ -1,6 +1,6 @@
 #!/bin/bash
 # author: http://fantasyui.com
-# code: https://github.com/fantasyui-com/cover
+# code: https://github.com/fantasyui-com/mockup
 
 SUB=$1;
 OUT=$2;
