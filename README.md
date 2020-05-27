@@ -1,15 +1,45 @@
 # mockup
-Perspective app screens and isometric mock-up tool. Automated high quality, high resolution, marketing art designer for mockups. Written in minimalist Bash using ImageMagick and Love!
+Perspective app screens, and isometric mock-up designs.
+Free Open Source automated high quality, high resolution, marketing art designer for mockup images.
+Written in minimalist Bash using ImageMagick and Love!
 
-## About
+This is a UNIX/Linux program first, you give it a screenshot of your program and it gives you that same screenshot carefully positioned in various scenarios, iPhone, TV, Laptop, etc... It exists because people and dribbbles keep bothering us about portfolios and we don't have time, the only time we do have is for a couple of commands, which is what mockup is great for.
 
-### What is it?
+![all](/docs/all.jpg)
 
-This is a UNIX/Linux program first, you give it a screenshot of your program and it gives you that same screenshot carefully positioned in various scenarios, iPhone, TV, Laptop, etc...
+## Installation
 
-### Why is it?
+The current v2 is in development, it will be an rpm package, or now fork the repository, and use ./mockup
 
-Because people and dribbbles keep bothering us about portfolios and we don't have time, the only time we do have is for ```dnf install mockup; mockup --all --input ~/my-screenshots --output ~/my-newly-generated-portfolio-images```
+## Usage and Command Reference
+
+### Image Based Templates
+
+Output format is up to you, change hand1-demo.jpg to hand1-demo.png for PNG formatted image data.
+
+```sh
+
+mockup --template hand1 --input sample/image1.png --output hand1-demo.jpg
+
+mockup --template laptop1 --input sample/image1.png --output laptop1-demo.jpg
+
+mockup --template tablet1 --input sample/image1.png --output tablet1-demo.jpg
+
+mockup --template tv1 --input sample/image1.png --output tv1-demo.jpg
+
+```
+
+### Synthetic/Generative Designs
+
+Note the use of optional --background flag.
+
+```sh
+
+mockup --template stack2 --background '#002b36' --input sample/image1.png sample/image2.png --output stack2-demo.jpg
+
+mockup --template stack3 --background '#002b36' --input sample/image1.png sample/image2.png sample/image3.png --output stack3-demo.jpg
+
+```
 
 ### A Promise of Simplicity
 
@@ -39,8 +69,9 @@ I will provide an rpm that will include dependency handling and the next release
 
 ```shell
 
-# Not real code, just example of what is coming.
+
 mockup --template laptop1 --output ~/the-result.png --input ~/Desktop/my-image1.png ~/Desktop/my-image2.png
+
 mockup -t laptop1 -o ~/the-result.png -i ~/Desktop/my-image1.png ~/Desktop/my-image2.png
 
 ```
@@ -68,25 +99,29 @@ I hope to create a simple way to install mockup on a $35 Raspberry PI, I will pu
 - I will present a JSON pr easy to parse file, file for other languages implementations.
 
 
-## Mockup Demo
+## Mockup Demos
 
-Overview
-![all](/docs/all.jpg)
 
-```gray1``` preset
-![gray1](/docs/gray1.jpg)
-
-```hand1``` preset
+hand1 preset
 ![hand1](/docs/hand1.jpg)
 
-```laptop1``` preset
+laptop1 preset
 ![laptop1](/docs/laptop1.jpg)
 
-```tablet1``` preset
+tablet1 preset
 ![tablet1](/docs/tablet1.jpg)
 
-```tv1``` preset
+tv1 preset
 ![tv1](/docs/tv1.jpg)
+
+### Synthetic/Generative
+
+stack2 preset
+![stack2](/docs/stack2.jpg)
+
+stack3 preset
+![stack3](/docs/stack3.jpg?)
+
 
 Actual size close-up (resulting images are print quality)
 ![quality](/docs/quality.jpg)
@@ -98,33 +133,9 @@ Actual size close-up (resulting images are print quality)
 ## Quick Installation
 
     mkdir ~/GitHub; cd ~/GitHub;
-    git clone git@github.com:fantasyui-com/mockup.git mockup;
-
-## Usage
-
-Fork this repository anywhere you like, open up your terminal execute: ```mockup/use``` ```PRESET-NAME```  ```OUTPUT-IMAGE``` ```YOUR-INPUT-IMAGE(S)``` (Note that output comes before input, we can be sure there is a single output but some presets will accept multiple images.)
-
-```shell
-
-~/GitHub/mockup/use laptop1 ~/the-result.png ~/Desktop/my-image1.png ~/Desktop/my-image2.png
-
-```
-
-## Snippets
-
-```shell
-
-mockup/use hand1 hand-demo.png my-file.png;
-
-mockup/use laptop1 laptop-demo.png my-file.png;
-
-mockup/use tv1 tv-demo.png my-file.png;
-
-mockup/use tablet1 tablet-demo.png my-file.png;
-
-mockup/use gray1 gray-demo.png my-file1.png my-file2.png;
-
-```
+    git clone git@github.com:fantasyui-com/mockup.git
+    cd mockup;
+    ./mockup --template hand1 --input Photos/face.jpg --output wow.jpg
 
 ## Bonus
 
@@ -136,14 +147,19 @@ Here is a quick script that will create images based on Screen*.png on your ~/De
 INDEX=1;
 find ~/Desktop -maxdepth 1 -type f -iname "Screen*.png" | while read NAME
 do
-  ~/GitHub/mockup/use hand1 ./test-hand1-${INDEX}.png "${NAME}";
-  ~/GitHub/mockup/use laptop1 ./test-laptop1-${INDEX}.png "${NAME}";
-  ~/GitHub/mockup/use tv1 ./test-tv1-${INDEX}.png "${NAME}";
-  ~/GitHub/mockup/use tablet1 ./test-tablet1-${INDEX}.png "${NAME}";
+  mockup -t hand1 -i  "${NAME}" -o ./test-hand1-${INDEX}.png;
+  mockup -t laptop1 -i  "${NAME}" -o ./test-laptop1-${INDEX}.png;
+  mockup -t tv1 -i  "${NAME}" -o ./test-tv1-${INDEX}.png;
+  mockup -t tablet1 -i  "${NAME}" -o ./test-tablet1-${INDEX}.png;
   INDEX=$((INDEX+1));
 done;
 
 ```
+
+## Changelog
+
+- gray1 preset renamed to stack2
+- added new preset stack3 for 3 images
 
 ## Credits
 
