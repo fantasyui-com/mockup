@@ -73,14 +73,20 @@ I hope to create a simple way to install mockup on a $35 Raspberry PI, I will pu
 Overview
 ![all](/docs/all.jpg)
 
+```gray1``` preset
+![gray1](/docs/gray1.jpg)
+
 ```hand1``` preset
 ![hand1](/docs/hand1.jpg)
 
 ```laptop1``` preset
 ![laptop1](/docs/laptop1.jpg)
 
-```gray1``` preset
-![gray1](/docs/gray1.jpg)
+```tablet1``` preset
+![tablet1](/docs/tablet1.jpg)
+
+```tv1``` preset
+![tv1](/docs/tv1.jpg)
 
 Actual size close-up (resulting images are print quality)
 ![quality](/docs/quality.jpg)
