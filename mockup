@@ -13,17 +13,26 @@ while [[ $# -gt 0 ]]; do
   case $key in
 
       -v|--verbose)
+        shift # past argument
+        VERBOSITY=$(($VERBOSITY+1));
+
         while [[ $# -gt 0 ]]; do # while argument arry has more than zero items
           if [[ "$1" =~ ^- ]]; then # if this argument starts with a minus
-            shift # past argument
-            VERBOSITY=$(($VERBOSITY+1));
+            echo VERBOSITY had NO value $1
             break
           else # this argument does not start with a minus, add it.
-            shift # past argument
-            VERBOSITY=$(($VERBOSITY+$1));
+            echo VERBOSITY had value $1
+            VERBOSITY=$(($VERBOSITY+$1-1));
             shift # past value
           fi;
         done;
+        echo VERBOSITY: $VERBOSITY;
+      ;;
+
+      -b|--background)
+        BACKGROUND="$2"
+        shift # past argument
+        shift # past value
       ;;
 
       -t|--template)
@@ -62,6 +71,7 @@ if [[ VERBOSITY -gt 1 ]]; then
 echo POSITIONAL: "${POSITIONAL[@]}";
 fi;
 if [[ VERBOSITY -gt 0 ]]; then
+echo TEMPORARY: $TEMPORARY;
 echo VERBOSITY: $VERBOSITY;
 echo TEMPLATE: $TEMPLATE;
 echo INPUT: "${INPUT[@]}";

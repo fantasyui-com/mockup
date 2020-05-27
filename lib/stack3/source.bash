@@ -14,7 +14,7 @@ fi;
 
 
 # image size
-IW=4133;
+IW=4533;
 IH=2745;
 
 # first image coordiantes
