@@ -1,11 +1,10 @@
 # source image https://unsplash.com/@firmbee?photo=GANqCr1BRTU
 
-# setup defaults
-SRC0=${INPUT[0]};
-SRC1=${INPUT[1]};
-
-# update defaults if possible
-if [ -n "${INPUT[1]}" ]; then SRC1="${INPUT[0]}"; fi
+REQUIRED_IMAGES=2;
+if [[ ${#INPUT[@]} -lt $REQUIRED_IMAGES ]]; then
+  echo "ERROR: This preset requires $REQUIRED_IMAGES images, the number of images you provided is ${#INPUT[@]}."
+  exit 1;
+fi;
 
 # image size
 IW=4133;
@@ -57,8 +56,8 @@ HW2=$(echo "scale=2;sqrt(((${CX2}-${AX2})^2)+((${CY2}-${AY2})^2))"|bc)
 HH2=$(echo "scale=2;sqrt(((${BX2}-${AX2})^2)+((${BY2}-${AY2})^2))"|bc)
 
 # resize SRC image to match the artwork hole.
-convert "${SRC0}" -resize ${HW1}x${HH1}^ -gravity center -crop ${HW1}x${HH1}+0+0 -sharpen 0x2 -quality 100 "${TEMPORARY}/resized1.png";
-convert "${SRC1}" -resize ${HW2}x${HH2}^ -gravity center -crop ${HW2}x${HH2}+0+0 -sharpen 0x2 -quality 100 "${TEMPORARY}/resized2.png";
+convert "${INPUT[0]}" -resize ${HW1}x${HH1}^ -gravity center -crop ${HW1}x${HH1}+0+0 -sharpen 0x2 -quality 100 "${TEMPORARY}/resized1.png";
+convert "${INPUT[1]}" -resize ${HW2}x${HH2}^ -gravity center -crop ${HW2}x${HH2}+0+0 -sharpen 0x2 -quality 100 "${TEMPORARY}/resized2.png";
 
 convert "${TEMPORARY}/resized1.png" \( +clone -background black -shadow 80x10-55+55 \) +swap -background none  -layers merge +repage "${TEMPORARY}/resized1.png"
 convert "${TEMPORARY}/resized2.png" \( +clone -background black -shadow 80x10-55+55 \) +swap -background none  -layers merge +repage "${TEMPORARY}/resized2.png"

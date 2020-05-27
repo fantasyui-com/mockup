@@ -8,6 +8,9 @@ INPUT=(); # list of images to use
 OUTPUT=''; # name of the target
 VERBOSITY=0; # name of the target
 
+function INFO(){ echo $@; }
+function NOTE(){ if [[ $VERBOSITY -gt 10 ]]; then echo $@; fi; }
+
 while [[ $# -gt 0 ]]; do
   key="$1";
   case $key in
