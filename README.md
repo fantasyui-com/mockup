@@ -116,6 +116,9 @@ tv1 preset
 
 ### Synthetic/Generative
 
+long1 preset
+![long1](/docs/long1.jpg)
+
 stack2 preset
 ![stack2](/docs/stack2.jpg)
 
