@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+
+TEMPORARY=$(mktemp -d /tmp/mockup.XXXXXXXXX)
+TEMPLATES=($(ls -1 lib));
+POSITIONAL=();
+TEMPLATE=''; # name of the template to use
+INPUT=(); # list of images to use
+OUTPUT=''; # name of the target
+VERBOSITY=0; # name of the target
+
+while [[ $# -gt 0 ]]; do
+  key="$1";
+  case $key in
+
+      -v|--verbose)
+        while [[ $# -gt 0 ]]; do # while argument arry has more than zero items
+          if [[ "$1" =~ ^- ]]; then # if this argument starts with a minus
+            shift # past argument
+            VERBOSITY=$(($VERBOSITY+1));
+            break
+          else # this argument does not start with a minus, add it.
+            shift # past argument
+            VERBOSITY=$(($VERBOSITY+$1));
+            shift # past value
+          fi;
+        done;
+      ;;
+
+      -t|--template)
+        TEMPLATE="$2"
+        shift # past argument
+        shift # past value
+      ;;
+
+      -o|--output)
+        OUTPUT="$2"
+        shift # past argument
+        shift # past value
+      ;;
+
+      -i|--input)
+        shift # past argument
+
+        while [[ $# -gt 0 ]]; do # while argument arry has more than zero items
+          if [[ "$1" =~ ^- ]]; then # if this argument starts with a minus
+            break
+          else # this argument does not start with a minus, add it.
+            INPUT+=("$1")
+            shift # past value
+          fi;
+        done;
+      ;; #/input
+
+      *)  # unknown option
+        POSITIONAL+=("$1") # save it in an array for later
+        shift # past argument
+      ;;
+  esac
+done
+
+if [[ VERBOSITY -gt 1 ]]; then
+echo POSITIONAL: "${POSITIONAL[@]}";
+fi;
+if [[ VERBOSITY -gt 0 ]]; then
+echo VERBOSITY: $VERBOSITY;
+echo TEMPLATE: $TEMPLATE;
+echo INPUT: "${INPUT[@]}";
+echo OUTPUT: "${OUTPUT[@]}";
+fi;
+
+if [ -z "$TEMPLATE" ]; then
+  echo;
+  echo ERROR:
+  echo "Missing Template Argument: You must specify a valid template name.";
+  echo Supported template names are: ${TEMPLATES[@]};
+  echo "Try 'mockup --help for more information."
+  exit 1;
+fi
+
+if [[ ! " ${TEMPLATES[@]} " =~ " ${TEMPLATE} " ]]; then
+  echo;
+  echo ERROR:
+  echo "Unrecognized Template Name: ${TEMPLATE}";
+  echo Supported template names are: ${TEMPLATES[@]};
+  echo "Try 'mockup --help for more information."
+  exit 1;
+fi
+
+if [ -z "$INPUT" ]; then
+  echo;
+  echo ERROR:
+  echo "Missing Input Argument: You must specify input image(s) to use with the template.";
+  echo "Try 'mockup --help for more information."
+  exit 1;
+fi
+
+if [ -z "$OUTPUT" ]; then
+  echo;
+  echo ERROR:
+  echo "Missing Output Argument: You must specify an output name to save results into.";
+  echo "Try 'mockup --help for more information."
+  exit 1;
+fi
+
+. "lib/${TEMPLATE}/source.bash"
