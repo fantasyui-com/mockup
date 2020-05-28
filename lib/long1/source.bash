@@ -13,6 +13,8 @@ PRIMARY_HEIGHT=$IMAGE_HEIGHT;
 SECONDARY_WIDTH=$(echo "scale=2; 0.33*${IMAGE_WIDTH}"|bc)
 SECONDARY_HEIGHT=$IMAGE_HEIGHT;
 
+DOMINANT_COLOR=1;
+
 NOTE Create a blank canvas.
 convert -size ${IMAGE_WIDTH}x${IMAGE_HEIGHT}^ gradient:${BACKGROUND:-'#333333'}-black "${TEMPORARY}/layer-00.png";
 
